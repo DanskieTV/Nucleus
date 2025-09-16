@@ -1,0 +1,73 @@
+$engine: 3
+$onesync: on
+name: Nucleus Framework (Basic)
+version: 1.0.0
+author: Kuro-sama
+description: A basic FiveM RP framework with core functionality
+
+tasks:
+  # STANDALONE RESOURCES
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    subpath: resources
+    dest: ./resources/[cfx-default]
+  - action: remove_path
+    path: ./resources/[cfx-default]/[gameplay]/chat
+
+  # Database
+  - action: download_file
+    path: ./tmp/files/oxmysql.zip
+    url: https://github.com/overextended/oxmysql/releases/download/v2.12.0/oxmysql.zip
+  - action: unzip
+    dest: ./resources/[standalone]
+    src: ./tmp/files/oxmysql.zip
+
+  # UI Libraries
+  - action: download_file
+    path: ./tmp/menuv.zip
+    url: https://github.com/ThymonA/menuv/releases/download/v1.4.1/menuv_v1.4.1.zip
+  - action: unzip
+    dest: ./resources/[standalone]/menuv
+    src: ./tmp/menuv.zip
+
+  # Utility Resources
+  - action: download_github
+    dest: ./resources/[standalone]/progressbar
+    ref: main
+    src: https://github.com/qbcore-framework/progressbar
+
+  - action: download_github
+    dest: ./resources/[standalone]/interact-sound
+    ref: master
+    src: https://github.com/qbcore-framework/interact-sound
+
+  - action: download_github
+    dest: ./resources/[standalone]/connectqueue
+    ref: master
+    src: https://github.com/qbcore-framework/connectqueue
+
+  - action: download_github
+    dest: ./resources/[standalone]/PolyZone
+    ref: master
+    src: https://github.com/qbcore-framework/PolyZone
+
+  - action: waste_time # prevent github throttling
+    seconds: 5
+
+  # VOICE
+  - action: download_github
+    dest: ./resources/[voice]/pma-voice
+    ref: main
+    src: https://github.com/AvarianKnight/pma-voice
+
+  # Prepare Database
+  - action: connect_database
+
+  # Download a basic server.cfg (required by txAdmin)
+  - action: download_file
+    path: ./server.cfg
+    url: https://raw.githubusercontent.com/citizenfx/cfx-server-data/master/server.cfg
+
+  # Clean up
+  - action: remove_path
+    path: ./tmp
