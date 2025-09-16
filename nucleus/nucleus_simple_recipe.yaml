@@ -63,6 +63,35 @@ tasks:
   # Prepare Database
   - action: connect_database
 
+  # Create server.cfg (required by txAdmin)
+  - action: write_file
+    path: ./server.cfg
+    content: |
+      # Nucleus Framework Server Configuration
+      set sv_hostname "Nucleus Framework Server"
+      set sv_maxclients 32
+      set sv_scriptHookAllowed 0
+      set onesync on
+      set sv_enforceGameBuild 2944
+      
+      # Database Configuration
+      set mysql_connection_string "mysql://root:password@localhost/nucleus_core?charset=utf8mb4"
+      
+      # Dependencies
+      ensure oxmysql
+      
+      # Basic Addons
+      ensure mapmanager
+      ensure chat
+      ensure spawnmanager
+      ensure sessionmanager
+      ensure fivem
+      ensure hardcap
+      ensure rconlog
+      
+      # Core Framework (add your nucleus framework here)
+      # ensure nucleus
+
   # Clean up
   - action: remove_path
     path: ./tmp
