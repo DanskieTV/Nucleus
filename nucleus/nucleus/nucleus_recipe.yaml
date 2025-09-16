@@ -1,0 +1,359 @@
+$engine: 3
+$onesync: on
+name: Nucleus Framework
+version: 1.0.0
+author: Kuro-sama
+description: A basic FiveM RP framework built from scratch with player management, jobs, money system & more!
+
+tasks:
+  # Download Base Files
+  - action: download_github
+    src: https://github.com/yourusername/nucleus-framework
+    ref: main
+    dest: ./tmp/nucleus
+
+  - action: move_path
+    src: ./tmp/nucleus/server.cfg
+    dest: ./server.cfg
+
+  - action: move_path
+    src: ./tmp/nucleus/myLogo.png
+    dest: ./myLogo.png
+
+  # Prepare Database
+  - action: connect_database
+  - action: query_database
+    file: ./tmp/nucleus/database.sql
+
+  # STANDALONE RESOURCES
+  - action: download_github
+    src: https://github.com/citizenfx/cfx-server-data
+    subpath: resources
+    dest: ./resources/[cfx-default]
+  - action: remove_path
+    path: ./resources/[cfx-default]/[gameplay]/chat
+
+  # Database
+  - action: download_file
+    path: ./tmp/files/oxmysql.zip
+    url: https://github.com/overextended/oxmysql/releases/download/v2.12.0/oxmysql.zip
+  - action: unzip
+    dest: ./resources/[standalone]
+    src: ./tmp/files/oxmysql.zip
+
+  # UI Libraries
+  - action: download_file
+    path: ./tmp/menuv.zip
+    url: https://github.com/ThymonA/menuv/releases/download/v1.4.1/menuv_v1.4.1.zip
+  - action: unzip
+    dest: ./resources/[standalone]/menuv
+    src: ./tmp/menuv.zip
+
+  # Utility Resources
+  - action: download_github
+    dest: ./resources/[standalone]/bob74_ipl
+    ref: master
+    src: https://github.com/qbcore-framework/bob74_ipl
+
+  - action: download_github
+    dest: ./resources/[standalone]/safecracker
+    ref: main
+    src: https://github.com/qbcore-framework/safecracker
+
+  - action: download_github
+    dest: ./resources/[standalone]/screenshot-basic
+    ref: master
+    src: https://github.com/citizenfx/screenshot-basic
+
+  - action: download_github
+    dest: ./resources/[standalone]/progressbar
+    ref: main
+    src: https://github.com/qbcore-framework/progressbar
+
+  - action: download_github
+    dest: ./resources/[standalone]/interact-sound
+    ref: master
+    src: https://github.com/qbcore-framework/interact-sound
+
+  - action: download_github
+    dest: ./resources/[standalone]/connectqueue
+    ref: master
+    src: https://github.com/qbcore-framework/connectqueue
+
+  - action: download_github
+    dest: ./resources/[standalone]/PolyZone
+    ref: master
+    src: https://github.com/qbcore-framework/PolyZone
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # VOICE
+  - action: download_github
+    dest: ./resources/[voice]/pma-voice
+    ref: main
+    src: https://github.com/AvarianKnight/pma-voice
+
+  - action: download_github
+    dest: ./resources/[voice]/nucleus-radio
+    ref: main
+    src: https://github.com/yourusername/nucleus-radio
+
+  # MAPS
+  - action: download_github
+    dest: ./resources/[defaultmaps]/hospital_map
+    ref: main
+    src: https://github.com/qbcore-framework/hospital_map
+
+  - action: download_github
+    dest: ./resources/[defaultmaps]/dealer_map
+    ref: main
+    src: https://github.com/qbcore-framework/dealer_map
+
+  - action: download_github
+    dest: ./resources/[defaultmaps]/[prison_map]
+    ref: main
+    src: https://github.com/qbcore-framework/prison_map
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # NUCLEUS CORE FRAMEWORK
+  - action: move_path
+    src: ./tmp/nucleus
+    dest: ./resources/[nucleus]/nucleus
+
+  # NUCLEUS BASIC RESOURCES
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-scoreboard
+    ref: main
+    src: https://github.com/yourusername/nucleus-scoreboard
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-adminmenu
+    ref: main
+    src: https://github.com/yourusername/nucleus-adminmenu
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-multicharacter
+    ref: main
+    src: https://github.com/yourusername/nucleus-multicharacter
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-target
+    ref: main
+    src: https://github.com/yourusername/nucleus-target
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-hud
+    ref: main
+    src: https://github.com/yourusername/nucleus-hud
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # NUCLEUS VEHICLE SYSTEM
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-vehiclesales
+    ref: main
+    src: https://github.com/yourusername/nucleus-vehiclesales
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-vehicleshop
+    ref: main
+    src: https://github.com/yourusername/nucleus-vehicleshop
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-vehiclekeys
+    ref: main
+    src: https://github.com/yourusername/nucleus-vehiclekeys
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-garages
+    ref: main
+    src: https://github.com/yourusername/nucleus-garages
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-fuel
+    ref: main
+    src: https://github.com/yourusername/nucleus-fuel
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # NUCLEUS JOBS
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-policejob
+    ref: main
+    src: https://github.com/yourusername/nucleus-policejob
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-ambulancejob
+    ref: main
+    src: https://github.com/yourusername/nucleus-ambulancejob
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-mechanicjob
+    ref: main
+    src: https://github.com/yourusername/nucleus-mechanicjob
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-taxijob
+    ref: main
+    src: https://github.com/yourusername/nucleus-taxijob
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-busjob
+    ref: main
+    src: https://github.com/yourusername/nucleus-busjob
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-garbagejob
+    ref: main
+    src: https://github.com/yourusername/nucleus-garbagejob
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # NUCLEUS ECONOMY
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-banking
+    ref: main
+    src: https://github.com/yourusername/nucleus-banking
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-atm
+    ref: main
+    src: https://github.com/yourusername/nucleus-atm
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-shops
+    ref: main
+    src: https://github.com/yourusername/nucleus-shops
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-pawnshop
+    ref: main
+    src: https://github.com/yourusername/nucleus-pawnshop
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-crypto
+    ref: main
+    src: https://github.com/yourusername/nucleus-crypto
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # NUCLEUS HOUSING
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-houses
+    ref: main
+    src: https://github.com/yourusername/nucleus-houses
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-apartments
+    ref: main
+    src: https://github.com/yourusername/nucleus-apartments
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-interior
+    ref: main
+    src: https://github.com/yourusername/nucleus-interior
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-doorlock
+    ref: main
+    src: https://github.com/yourusername/nucleus-doorlock
+
+  # NUCLEUS CRIMINAL ACTIVITIES
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-bankrobbery
+    ref: main
+    src: https://github.com/yourusername/nucleus-bankrobbery
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-storerobbery
+    ref: main
+    src: https://github.com/yourusername/nucleus-storerobbery
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-houserobbery
+    ref: main
+    src: https://github.com/yourusername/nucleus-houserobbery
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-jewelery
+    ref: main
+    src: https://github.com/yourusername/nucleus-jewelery
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # NUCLEUS ADDITIONAL FEATURES
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-phone
+    ref: main
+    src: https://github.com/yourusername/nucleus-phone
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-weather
+    ref: main
+    src: https://github.com/yourusername/nucleus-weather
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-time
+    ref: main
+    src: https://github.com/yourusername/nucleus-time
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-spawn
+    ref: main
+    src: https://github.com/yourusername/nucleus-spawn
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-cityhall
+    ref: main
+    src: https://github.com/yourusername/nucleus-cityhall
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-licenses
+    ref: main
+    src: https://github.com/yourusername/nucleus-licenses
+
+  - action: waste_time # prevent github throttling
+    seconds: 10
+
+  # NUCLEUS UTILITIES
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-tow
+    ref: main
+    src: https://github.com/yourusername/nucleus-tow
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-carwash
+    ref: main
+    src: https://github.com/yourusername/nucleus-carwash
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-prison
+    ref: main
+    src: https://github.com/yourusername/nucleus-prison
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-clothing
+    ref: main
+    src: https://github.com/yourusername/nucleus-clothing
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-menu
+    ref: main
+    src: https://github.com/yourusername/nucleus-menu
+
+  - action: download_github
+    dest: ./resources/[nucleus]/nucleus-input
+    ref: main
+    src: https://github.com/yourusername/nucleus-input
+
+  # Clean up
+  - action: remove_path
+    path: ./tmp
